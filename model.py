@@ -132,7 +132,7 @@ class BraLM(nn.Module):
 
     def decode(self, start, vocab, max_new_tokens=16, do_sample=False, temperature=1):
         ret = []
-        pe = self.get_positional_encoding(max_new_tokens, self.hidden_size)
+        pe = self.get_positional_encoding(512, self.hidden_size)
         for i, pair in enumerate(start):
             if i == 0:
                 energy_tensor = self.get_initial_tensor(batch_size=1).squeeze(0)
