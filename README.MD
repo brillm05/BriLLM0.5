@@ -3,8 +3,10 @@
 ## Overview
 This work introduces the first brain-inspired large language model (BriLLM). This is a non-Transformer, non-GPT, non-traditional machine learning input-output controlled generative language model. The model is based on the Signal Fully-connected flowing (SiFu) definition on the directed graph in terms of the neural network, and has the interpretability of all nodes on the graph of the whole model, instead of the traditional machine learning model that only has limited interpretability at the input and output ends. 
 
+
+## SiFU Mechanism
 ![](./figs/fig1.png)
-As shown in Figure 1, SiFu model is a graph composed of multiple nodes, which are sparsely activated and utilize tensors to transmit a nominal signal.
+> As shown in Figure 1, SiFu model is a graph composed of multiple nodes, which are sparsely activated and utilize tensors to transmit a nominal signal.
 Each node (ideally, a layer of neurons) represents a certain concept or word, e.g., a noun, a verb, etc.
 Each edge models the relationship between every node pair.
 The signal is transmitted by the magnitude of the energy. The energy will be strengthened, i.e., maximized, if it is in the right route. Or, at least, the right path always keeps the maximal energy for the transmitted signal.
@@ -12,9 +14,15 @@ Each node is sequentially activated in terms of the maximized energy.
 Route or path is determined in a competitive way, i.e., the next node will be activated only if the energy can be maximally delivered in this node.
 
 
+## Architecture
 ![](./figs/fig2.png)
-As shown in Figure 2, BriLLM implements SiFu neural network for language modeling. 
+> As shown in Figure 2, BriLLM implements SiFu neural network for language modeling. 
 Each token in the vocabulary is modeled as a node, which is defined by a hidden layer of neurons in the neural network.
+
+
+## Training Network
+![](./figs/fig3.png)
+> To train a sample in BriLLM, every time we build an individual common neural network to perform the regular BP training. This network consists of two parts, in which the front part connects all input nodes (i.e., tokens), then it follows the rear parts which connect all possible paths in order. At last, a softmax layer collects all paths' energy tensors to indicate the right path with a 0-1 ground truth vector. We adopt a cross-entropy loss for training.
 
 
 ## Installation
