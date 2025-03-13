@@ -25,6 +25,32 @@ Each token in the vocabulary is modeled as a node, which is defined by a hidden 
 > To train a sample in BriLLM, every time we build an individual common neural network to perform the regular BP training. This network consists of two parts, in which the front part connects all input nodes (i.e., tokens), then it follows the rear parts which connect all possible paths in order. At last, a softmax layer collects all paths' energy tensors to indicate the right path with a 0-1 ground truth vector. We adopt a cross-entropy loss for training.
 
 
+## Dataset
+We use the subset from the Chinese version of Wikipedia, which contains over 100M Chinese characters. We truncate the long sentences into small sentences with a maximum length of 16.
+We select a vocabulary of 4,000 tokens consisting of the most frequently used Chinese characters.
+
+
+## Implementation Details.
+BriLLM is implemented using PyTorch. 
+It uses sinusoidal positional encoding, GeLU as the activation function, cross-entropy loss for next-token prediction, and an embedding size of $d_{model} = 32$. 
+We used the AdamW optimizer with $\beta_1 = 0.9$, $\beta_2 = 0.999$ and $\epsilon = 10^{-8}$. 
+The model size is about $512 + 4000 * 4000 * (32 * 32 + 32) \approx 16B$.
+We trained our models on one machine with 8 NVIDIA A800 GPUs for 1.5k steps. 
+![](./figs/fig4.png)
+
+
+## Complexity
+$n$ is the sequence length, $v$ is the vocabulary size, and $d$ is the representation dimension. The computational complexity is $O(n \cdot v \cdot d^2)$.
+
+
+## Case Study
+![](./figs/fig5.png)
+
+
+## Comparison of LLM and BriLLM
+![](./figs/fig6.png)
+
+
 ## Installation
 ```bash
 pip install torch
