@@ -1,5 +1,10 @@
 # BriLLM: Brain-inspired Large Language Model
 
+Our paper: https://arxiv.org/pdf/2503.11299
+
+Our github repo: https://github.com/brillm05/BriLLM0.5
+
+
 ## Overview
 This work introduces the first brain-inspired large language model (BriLLM). This is a non-Transformer, non-GPT, non-traditional machine learning input-output controlled generative language model. The model is based on the Signal Fully-connected flowing (SiFu) definition on the directed graph in terms of the neural network, and has the interpretability of all nodes on the graph of the whole model, instead of the traditional machine learning model that only has limited interpretability at the input and output ends. 
 
